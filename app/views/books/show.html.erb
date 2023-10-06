@@ -18,14 +18,21 @@
           <td><%= link_to @book.title, @book %></td>
           <td>コメント数： <%= @book.book_comments.count %></td>
           <td><%= @book.body %></td>
-          <td><%= render "favorites/btn", book: @book %></td>
+          <td id="favorite_btn_<%= @book.id %>">
+           <%= render "favorites/btn", book: @book %>
+          </td>
+          <td id="comment_counter">
+             <%= render "book_comments/counter", book: @book %>
+          </td>
            <% if @book.user == current_user %>
-            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
         </tr>
       </table>
-      <%= render "book_comments/index", book: @book %>
+      <div id="comment_index">
+         <%= render "book_comments/index", book: @book %>
+      </div>
       <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
     </div>
   </div>
